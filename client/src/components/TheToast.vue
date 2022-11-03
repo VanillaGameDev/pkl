@@ -108,7 +108,7 @@ const toastOff = computed(() => {
     </div>
     <div class="mx-4 flex-row w-full">
       <div class="flex flex-row items-center justify-between">
-        <h1 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200">Success</h1>
+        <h1 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200">Sucsess</h1>
         <svg xmlns="http://www.w3.org/2000/svg" @click="toastDisable"
           class="h-4 w-4 cursor-pointer text-gray-500 hover:text-gray-600 dark:text-gray-300 dark:hover:text-gray-200"
           viewBox="0 0 20 20" fill="currentColor">
