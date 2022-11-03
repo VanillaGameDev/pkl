@@ -17,7 +17,7 @@ const toastShow = computed(() => {
 </script>
 
 <template>
-  <div class="parents ">
+  <div class="parents">
 <TheLoading v-show="loading"/>
 <TheToast v-show="toastShow"/> 
  <router-view />
