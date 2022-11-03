@@ -1,17 +1,20 @@
-<script setup>
-
-</script>
+<script setup></script>
 <template>
-<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </template>
-
-
-
 <style scoped>
 .lds-roller {
   display: inline-block;
   position: absolute;
-
 }
 .lds-roller div {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -91,5 +94,4 @@
     transform: rotate(360deg);
   }
 }
-
 </style>
