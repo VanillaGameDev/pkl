@@ -73,6 +73,37 @@ class AuthMiddleware {
         console.log(error.message);
       }
    } 
+   
+   async login(req,res,next){
+    try {
+      const { username, password } = req.body;
+      if (!username || !password) {
+        return res.json({
+          status: "bad",
+          msg: "username atau password kosong",
+        });
+      }
+      const existUser = await User.findOne({ username });
+  
+      if (!existUser) {
+        return res.json({
+          status: "bad",
+          msg: "username tidak ada",
+        });
+      }
+  
+      const comparedPass = await bcrypt.compare(password, existUser.password);
+      if (!comparedPass) {
+        return res.json({
+          status: "bad",
+          msg: "password salah",
+        });
+      }
+      next()
+    }  catch (error) {
+        console.log(error.message);
+      }
+}
 }
 
 module.exports = AuthMiddleware

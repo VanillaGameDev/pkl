@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const AuthMiddleware = require('../middlewares/auth.middleware')
 
-const authMiddleware = new AuthMiddleware
+const authMiddleware = new AuthMiddleware()
   
 //register
 router.post("/register", authMiddleware.register, async (req, res) => {
@@ -80,23 +80,11 @@ router.post("/register", authMiddleware.register, async (req, res) => {
 });
 
 //login
-router.post("/login", async (req, res) => {
+router.post("/login", authMiddleware.login, async (req, res) => {
   try {
     const { username, password } = req.body;
-    if (!username || !password) {
-      return res.json({
-        status: "bad",
-        msg: "username atau password kosong",
-      });
-    }
-    const existUser = await User.findOne({ username });
-
-    if (!existUser) {
-      return res.json({
-        status: "bad",
-        msg: "username tidak ada",
-      });
-    }
+    
+    const user = await User.findOne({ username });
 
     const comparedPass = await bcrypt.compare(password, existUser.password);
     if (!comparedPass) {
@@ -106,12 +94,12 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const token = await jwt.sign({ user: existUser }, process.env.TOKEN_KEYWORD);
+    const token = await jwt.sign({ user }, process.env.TOKEN_KEYWORD);
 
     res.json({
       status: "ok",
       msg: "berhasil login !",
-      user: existUser,
+      user,
       token,
     });
   } catch (error) {
