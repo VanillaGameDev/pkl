@@ -104,6 +104,24 @@ class AuthMiddleware {
         console.log(error.message);
       }
 }
+async admin(req,res,next){
+  try {
+    
+    if(!username || !password){
+      return res.json({status: 'bad', msg:'username atau password kosong!'})}
+     
+      if(!username !== process.env.ADMIN_LOGIN ){
+       return res.json({status: 'bad', msg:'username salah!'})}
+      
+       if(password !== process.env.ADMIN_PASS){
+         return res.json({status: 'bad', msg:'password salah!'})}
+     
+         const token = jwt.sign({user: {username, password}}, process.env.TOKEN_KEYWORD)
+    
+  } catch (error) {
+    
+  }
+}
 }
 
 module.exports = AuthMiddleware
