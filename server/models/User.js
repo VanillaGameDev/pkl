@@ -13,22 +13,22 @@ const userSchema = new Schema(
     },
     fullname: {
       type: String,
-      required: true,
+      required: true
     },
     gender: {
       type: String,
-      required: true,
+      required: true
     },
     age: {
       type: String,
-      default: "",
+      default: ""
     },
     city: {
       type: String,
-      default: "",
+      default: ""
     },
   },
   { timestamps: true }
 );
 
-module.exports = model("User", userSchema);
+module.exports = model("User", userSchema)

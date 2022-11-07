@@ -170,7 +170,7 @@
 </template>
 
 <script>
-import { BeakerIcon } from "@heroicons/vue/24/solid";
+import { BeakerIcon } from '@heroicons/vue/24/solid';
 
 export default {
   components: { BeakerIcon },

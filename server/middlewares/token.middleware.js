@@ -1,12 +1,13 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
-const TokenMiddleWare = {
+class TokenMiddleware {
   async checkUser(req, res, next) {
     try {
-      const token = req.headers.authorization.split(" ")[1];
+      const token = req.headers.authorization?.split(" ")[1];
 
       if (!token) {
-        return res.json({ status: "bad", msg: "token tidak di temukan!" });
+        return res.json({ status: "bad", msg: "Token not found" });
       }
 
       const decodedToken = await jwt.decode(
@@ -16,21 +17,22 @@ const TokenMiddleWare = {
           if (err) {
             return res.json({
               status: "bad",
-              msg: "unathorized or invalid token",
+              msg: "Unauthorized or invalid token",
             });
           }
         }
       );
 
       if (!decodedToken) {
-        return res.json({ status: "bad", msg: "unathorized" });
+        return res.json({ status: "bad", msg: "Unauthorized" });
       }
 
       next();
     } catch (error) {
       console.log(error.message);
     }
-  },
+  }
+
   async checkAdmin(req, res, next) {
     try {
       const token = req.headers.authorization?.split(" ")[1];
@@ -46,12 +48,11 @@ const TokenMiddleWare = {
           if (err) {
             return res.json({
               status: "bad",
-              msg: "unathorized or invalid token",
+              msg: "Unauthorized or invalid token",
             });
           }
         }
       );
-      console.log(decodedToken);
 
       if (!decodedToken) {
         return res.json({ status: "bad", msg: "Unauthorized" });
@@ -60,7 +61,7 @@ const TokenMiddleWare = {
       if (decodedToken.user.username !== "admin1") {
         return res.json({
           status: "bad",
-          msg: "User Bukan Admin",
+          msg: " Anda bukan admin. Anda tidak diizinkan",
         });
       }
 
@@ -68,7 +69,8 @@ const TokenMiddleWare = {
     } catch (error) {
       console.log(error.message);
     }
-  },
+  }
+
   async checkAll(req, res, next) {
     try {
       const token = req.headers.authorization?.split(" ")[1];
@@ -89,6 +91,7 @@ const TokenMiddleWare = {
       if (!decodedAsAdminToken || !decodedAsUserToken) {
         return res.json({ status: "bad", msg: "Unauthorized" });
       }
+
       decodedAsAdminToken
         ? (req.admin = decodedAsAdminToken.admin)
         : (req.user = decodedAsUserToken.user);
@@ -97,7 +100,28 @@ const TokenMiddleWare = {
     } catch (error) {
       console.log(error.message);
     }
-  },
-};
+  }
 
-module.exports = TokenMiddleWare;
+  async checkPrivacy(req, res, next) {
+    try {
+      const token = req.headers.authorization?.split(" ")[1];
+      const decodedUser = jwt.decode(token, process.env.TOKEN_KEYWORD);
+      const currentUser = await User.findById(req.params.id);
+      if (
+        currentUser._id.toString() !== decodedUser.user._id &&
+        decodedUser.user.username !== process.env.ADMIN_LOGIN
+      ) {
+        return res.json({
+          status: "bad",
+          msg: "Anda tidak berhak mengubah & menghapus akun orang lain!",
+        });
+      }
+
+      next()
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+}
+
+module.exports = TokenMiddleware;

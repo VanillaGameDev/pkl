@@ -1,33 +1,35 @@
-require("dotenv").config();
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 
-//built in middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-//middleware third party
+
+app.use(express.json());
+
+
 app.use(cors({ origin: "*" }));
 
-// mongodb+srv://<username>:<password>@cluster0.f7lnxwz.mongodb.net/?retryWrites=true&w=majority
 mongoose
-  .connect(process.env.DB_URI)
+  .connect(
+    process.env.DB_URI
+  )
   .then(() => {
-    console.log("connect to database");
+    console.log("Connected to database");
   })
   .catch((err) => {
     console.log(err);
   });
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.send("Hello World!");
 });
 
-app.use("/api/v1/auth", require("./routes/auth"));
-app.use("/api/v1/accounts", require("./routes/accounts"));
+
+app.use("/api/v1/auth", require("./routes/auth.routes"));
+app.use("/api/v1/accounts", require("./routes/accounts.routes"));
 
 app.listen(process.env.PORT, () => {
-  console.log("server started");
+  console.log("Server started!");
 });

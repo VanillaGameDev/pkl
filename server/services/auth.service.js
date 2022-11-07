@@ -2,11 +2,10 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-class authService {
+class AuthService {
   async register(data) {
     try {
       const { username, password, fullname, gender } = data;
-
       const hashedPass = await bcrypt.hash(password, 10);
 
       const newUser = await new User({
@@ -15,12 +14,17 @@ class authService {
         fullname,
         gender,
       });
+
       const savedUser = await newUser.save();
-      const token = await jwt.sign({ savedUser }, process.env.TOKEN_KEYWORD);
+
+      const token = await jwt.sign(
+        { user: savedUser },
+        process.env.TOKEN_KEYWORD
+      );
 
       return {
         status: "ok",
-        msg: "berhasil daftar!",
+        msg: "Anda telah berhasil mendaftar!",
         user: savedUser,
         token,
       };
@@ -28,6 +32,7 @@ class authService {
       console.log(error.message);
     }
   }
+
   async login(data) {
     try {
       const { username, password } = data;
@@ -38,7 +43,7 @@ class authService {
 
       return {
         status: "ok",
-        msg: "berhasil login !",
+        msg: "Anda berhasil masuk!",
         user,
         token,
       };
@@ -46,18 +51,24 @@ class authService {
       console.log(error.message);
     }
   }
+
   async admin(data) {
     try {
+
       const { username, password } = data;
-      const token = await jwt.sign(
-        { username, password },
+      const token = jwt.sign(
+        { user: { username, password } },
         process.env.TOKEN_KEYWORD
       );
-      return { status: "ok", msg: "admin berhasil login", token };
+      return {
+        status: "ok",
+        msg: "Anda masuk sebagai admin",
+        token,
+      };
     } catch (error) {
       console.log(error.message);
     }
   }
 }
 
-module.exports = authService;
+module.exports = AuthService;
