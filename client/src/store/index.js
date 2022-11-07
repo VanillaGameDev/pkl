@@ -1,8 +1,8 @@
-import { createStore } from 'vuex'
-import authModule from './modules/auth'
+import { createStore } from "vuex";
+import authModule from "./modules/auth";
 
 export default createStore({
-  state:{
+  state: {
     loading: false,
     toast: {
       show: false,
@@ -12,15 +12,15 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    setLoading(state, payload){
-      state.loading = payload
+    setLoading(state, payload) {
+      state.loading = payload;
     },
-    setToast(state, payload){
-      state.toast = payload
-    } 
+    setToast(state, payload) {
+      state.toast = payload;
+    },
   },
   actions: {},
-  modules:{
-    auth:authModule
-  } ,
-})
+  modules: {
+    auth: authModule,
+  },
+});

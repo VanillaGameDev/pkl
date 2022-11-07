@@ -44,7 +44,6 @@
           >
         </a>
         <ul class="flex items-center hidden space-x-8 lg:flex">
-         
           <li>
             <router-link
               to="/register"

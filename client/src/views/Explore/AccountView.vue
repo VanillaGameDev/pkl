@@ -114,9 +114,7 @@ const deleteAccount = async () => {
             />
           </div>
           <div class="input-field mt-4 px-2 py-1">
-            <label for="Age"
-              >Alamat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-            </label>
+            <label for="Age">Alamat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
             <input
               id="alamat"
               placeholder="alamat"
@@ -149,13 +147,15 @@ const deleteAccount = async () => {
         </div>
         <div class="right ml-5">
           <button
-            :disabled="loading" @click="deleteAccount()"
+            :disabled="loading"
+            @click="deleteAccount()"
             class="delete-btn rounded px-4 py-2 bg-purple-400 delay-150 duration-150 ease-in-out hover:bg-purple-800 disabled:bg-purple-800 text-gray-50 ml-2"
           >
             Delete&nbsp;
           </button>
           <button
-            :disabled="loading" @click="logOut()"
+            :disabled="loading"
+            @click="logOut()"
             class="logout-btn rounded ml-4 px-4 py-2 bg-purple-400 delay-150 duration-150 ease-in-out hover:bg-purple-800 disabled:bg-purple-800 text-gray-50"
           >
             Logout
