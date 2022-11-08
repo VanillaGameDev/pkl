@@ -1,67 +1,62 @@
 <script setup>
-import Cookies from "js-cookie";
-import { computed, reactive } from "vue";
-import api from "@/helpers/api";
-import { useStore } from "vuex";
-
+import Cookies from 'js-cookie';
+import { computed, reactive } from 'vue';
+import api from '@/helpers/api';
+import { useStore } from 'vuex';
 const store = useStore();
-
 const loading = computed(() => {
   return store.state.loading;
 });
-
-const account = reactive(JSON.parse(Cookies.get("account")));
-
-const updateUser = async () => {
-  store.commit("setLoading", true, { root: true });
+const account = reactive(JSON.parse(Cookies.get('account')));
+const updateAccount = async () => {
+  store.commit('setLoading', true, { root: true });
   try {
     const res = await api.put(`/accounts/${account._id}`, { account });
-    Cookies.remove("account");
-    Cookies.set("account", JSON.stringify(res.data.account));
-    store.commit("setLoading", false, { root: true });
+    Cookies.remove('account');
+    Cookies.set('account', JSON.stringify(res.data.account));
+    store.commit('setLoading', false, { root: true });
     store.commit(
-      "setToast",
-      { show: true, msg: res.data.msg, type: "success" },
+      'setToast',
+      { show: true, msg: res.data.msg, type: 'success' },
       { root: true }
     );
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   } catch (error) {
-    store.commit("setLoading", false, { root: true });
+    store.commit('setLoading', false, { root: true });
     store.commit(
-      "setToast",
-      { show: true, msg: error.message, type: "error" },
+      'setToast',
+      { show: true, msg: error.message, type: 'error' },
       { root: true }
     );
   }
 };
-
 const logOut = () => {
-  Cookies.remove("token");
-  Cookies.remove("account");
+  Cookies.remove('token');
+  Cookies.remove('account');
   window.location.reload();
 };
 const deleteAccount = async () => {
-  store.commit("setLoading", true, { root: true });
+  store.commit('setLoading', true, { root: true });
   try {
     const res = await api.delete(`/accounts/${account._id}`);
-    Cookies.remove("account");
-    Cookies.remove("token");
-    store.commit("setLoading", false, { root: true });
+    Cookies.remove('account');
+    Cookies.remove('token');
+    store.commit('setLoading', false, { root: true });
     store.commit(
-      "setToast",
-      { show: true, msg: res.data.msg, type: "success" },
+      'setToast',
+      { show: true, msg: res.data.msg, type: 'success' },
       { root: true }
     );
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   } catch (error) {
-    store.commit("setLoading", false, { root: true });
+    store.commit('setLoading', false, { root: true });
     store.commit(
-      "setToast",
-      { show: true, msg: error.message, type: "error" },
+      'setToast',
+      { show: true, msg: error.message, type: 'error' },
       { root: true }
     );
   }
@@ -138,7 +133,7 @@ const deleteAccount = async () => {
       <div class="account-button flex py-12 justify-center items-center">
         <div class="left mr-10">
           <button
-            @click="updateUser()"
+            @click="updateAccount()"
             :disabled="loading"
             class="save-btn rounded px-4 py-2 bg-green-400 delay-150 duration-150 ease-in-out hover:bg-green-800 disabled:bg-green-800 text-gray-50"
           >
