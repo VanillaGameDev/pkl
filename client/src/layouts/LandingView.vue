@@ -30,7 +30,7 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-miterlimit="10"
-            stroke="currentColor"
+            stroke="White"
             fill="none"
           >
             <rect x="3" y="1" width="7" height="12"></rect>

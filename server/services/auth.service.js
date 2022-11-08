@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 class AuthService {
   async register(data) {
@@ -38,6 +38,8 @@ class AuthService {
       const { username, password } = data;
 
       const user = await User.findOne({ username });
+
+      const hashedPass = await bcrypt.hash(password, 10);
 
       const token = await jwt.sign({ user }, process.env.TOKEN_KEYWORD);
 
