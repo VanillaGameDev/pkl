@@ -21,7 +21,7 @@ router.get("/", checkAdmin, async (req, res) => {
 });
 
 // update account
-router.put("/:id", checkUser, update, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const result = await accountService.update({
       id: req.params.id,
@@ -46,7 +46,7 @@ router.get("/:id", checkAll, checkPrivacy, async (req, res) => {
 });
 
 // delete user
-router.delete("/:id", checkAll, checkPrivacy, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const result = await accountService.deleteUser(req.params.id);
 
