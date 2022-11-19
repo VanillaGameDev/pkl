@@ -7,6 +7,7 @@ const AccountMiddleware = require("../middlewares/account.middleware");
 
 const { checkAll, checkPrivacy, checkAdmin, checkUser } = new TokenMiddleware();
 const { update } = new AccountMiddleware();
+
 const accountService = new AccountService();
 
 // get all users
@@ -21,7 +22,7 @@ router.get("/", checkAdmin, async (req, res) => {
 });
 
 // update account
-router.put("/:id", async (req, res) => {
+router.put("/:id", update, async (req, res) => {
   try {
     const result = await accountService.update({
       id: req.params.id,

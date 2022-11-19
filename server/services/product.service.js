@@ -1,25 +1,30 @@
-const product = require('../models/Product')
+const Product = require('../models/Product')
 
-class ProductService {
+class productService {
     async Upload(data) {
         try {
-            const { NameProduct, Desc, Qty, Cover, Category, Price } = data;
+            const { Nameproduct, Desc, Qty, Cover, Category, Price } = data;
+
 
 
             const newProduct = await new Product({
-                NameProduct, Desc, Qty, Cover, Category, Price
+                Nameproduct, Desc, Qty, Cover, Category, Price
             });
 
-            const savedProduct = await newProduct.save();
+            const saveProduct = await newProduct.save();
+
+
             return {
                 status: "ok",
-                msg: "Akun Berhasil Di Upload",
-                Product: savedProduct,
-
+                msg: "Anda telah berhasil menambah product!",
+                user: saveProduct,
+                token,
             };
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error.message);
         }
+
     }
 }
-module.exports = ProductService;
+module.exports = productService;

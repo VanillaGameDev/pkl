@@ -57,12 +57,13 @@
             </div>
           </div>
           <li>
-            <a
-              href="/"
+            <router-link
+              to="/explore/product"
               aria-label="Our product"
               title="Our product"
               class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >Product</a
+              >Product</router-link
+            >
             >
           </li>
           <li>
@@ -131,7 +132,7 @@
           </li>
           <li>
             <router-link
-              to="explore/account"
+              to="/explore/account"
               aria-label="Sign up"
               title="Sign up"
               class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"

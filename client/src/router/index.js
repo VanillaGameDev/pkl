@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Cookies from "js-cookie";
 import LandingLayout from "../layouts/LandingView.vue";
-import ExploreLayout from "../layouts/ExplortView.vue";
+import ExploreView from "../layouts/ExplortView.vue";
 
 import AccountView from "../views/Explore/AccountView.vue";
 import HomeView from "../views/Explore/HomeView.vue";
+import ProductView from "../views/Explore/ProductView.vue"
 
 import RegisterView from "../views/Landing/RegisterView.vue";
 import LoginView from "../views/Landing/LoginView.vue";
@@ -43,7 +44,7 @@ const routes = [
   {
     path: "/explore",
     name: "Explore",
-    component: ExploreLayout,
+    component: ExploreView,
     children: [
       {
         path: "",
@@ -51,9 +52,14 @@ const routes = [
         component: HomeView,
       },
       {
-        path: "account",
+        path: 'account',
         name: "Account",
-        component: AccountView,
+        component: AccountView
+      },
+      {
+        path: "product",
+        name: "Product",
+        component: ProductView,
       },
     ],
     beforeEnter: (to, from, next) => {
