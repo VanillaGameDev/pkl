@@ -57,7 +57,7 @@
               >
                 Daftar
               </h3>
-              <form @submit="(e) => register(e)" class="register-box bg-white">
+              <form @submit="e => register(e)" class="register-box bg-white">
                 <div class="mb-1 sm:mb-2 bg-white">
                   <label
                     for="name"
@@ -142,27 +142,27 @@
 </template>
 
 <script setup>
-import { useStore } from "vuex";
-import { reactive, computed } from "vue";
+import { useStore } from 'vuex';
+import { reactive, computed } from 'vue';
 
 const store = useStore();
 
 const user = reactive({
-  username: "",
-  password: "",
-  fullname: "",
-  gender: "",
+  username: '',
+  password: '',
+  fullname: '',
+  gender: '',
 });
 const loading = computed(() => {
   return store.state.loading;
 });
 
-const register = async (e) => {
+const register = async e => {
   e.preventDefault();
 
   if (!user.username || !user.password) {
   } else {
-    store.dispatch("auth/register", user);
+    store.dispatch('auth/register', user);
   }
 };
 </script>

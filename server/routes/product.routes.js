@@ -1,11 +1,16 @@
-const Router = require("express").Router();
-const router = Router;
+const { Router } = require("express");
+const router = Router();
 
-let Product = require('../models/Product');
 
-router.post("/upload", authMiddleware.register, async (req, res) => {
+const productService = require("../services/product.service");
+
+
+const ProductService = new productService();
+
+// Register route
+router.post("/upload", async (req, res) => {
     try {
-        const result = await authService.register(req.body);
+        const result = await ProductService.ProductService(req.body);
 
         res.json(result);
     } catch (error) {

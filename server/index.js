@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", require("./routes/auth.routes"));
 app.use("/api/v1/accounts", require("./routes/accounts.routes"));
+app.use("/api/v1/product", require("./routes/product.routes"));
 
 app.listen(process.env.PORT, () => {
   console.log("Server started!");

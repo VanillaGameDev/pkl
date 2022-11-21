@@ -64,7 +64,6 @@
               class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >Product</router-link
             >
-            >
           </li>
           <li>
             <a
@@ -114,7 +113,7 @@
         <ul class="flex items-center hidden space-x-8 lg:flex">
           <li>
             <a
-              href="/"
+              href="explore/about"
               aria-label="About us"
               title="About us"
               class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"

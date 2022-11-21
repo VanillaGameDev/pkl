@@ -9,7 +9,7 @@
         >
           <div></div>
           <h2
-            class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto"
+            class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-200 sm:text-4xl md:mx-auto"
           >
             <span class="relative inline-block">
               <svg
@@ -34,11 +34,11 @@
                   height="24"
                 ></rect>
               </svg>
-              <span class="relative">The</span>
+              <span class="relative">Membaca</span>
             </span>
-            quick, brown fox jumps over a lazy dog
+            Adalah Langkah Awal Menjadi Pintar
           </h2>
-          <p class="text-base text-gray-700 md:text-lg">
+          <p class="text-base text-gray-500 md:text-lg">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
             accusantium doloremque rem aperiam, eaque ipsa quae.
           </p>
